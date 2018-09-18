@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:randomuser_flutter_app/pages/home_page.dart';
+
 void main() => runApp(RandomUserApp());
 
 class RandomUserApp extends StatelessWidget {
@@ -10,11 +12,7 @@ class RandomUserApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green
       ),
-      home: Container(
-        child: Center(
-          child: Text("Hi!"),
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
