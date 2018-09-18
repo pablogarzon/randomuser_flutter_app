@@ -5,6 +5,8 @@ class User {
   Name name;
   Picture picture;
 
+  User();
+
   User.fromJson(Map json){
     this.login = Login.fromJson(json["login"]);
     this.gender = json["gender"];
