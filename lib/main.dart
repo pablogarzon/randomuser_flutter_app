@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
+import 'package:randomuser_flutter_app/redux/app_state.dart';
+import 'package:randomuser_flutter_app/redux/app_reducer.dart';
+
 import 'package:randomuser_flutter_app/pages/home_page.dart';
 
 void main() => runApp(RandomUserApp());
 
 class RandomUserApp extends StatelessWidget {
+  final store = Store<AppState>(
+      appReducer,
+      initialState: AppState.initial(),
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Random user Flutter app',
-      theme: ThemeData(
-        primarySwatch: Colors.green
+    return StoreProvider(
+      store: store,
+      child: MaterialApp(
+        title: 'Random user Flutter app',
+        theme: ThemeData(
+          primarySwatch: Colors.green
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
