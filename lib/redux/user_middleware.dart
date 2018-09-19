@@ -9,7 +9,7 @@ import 'user_actions.dart';
 
 import 'package:randomuser_flutter_app/models/user.dart';
 
-class PersonMiddleware extends MiddlewareClass<AppState> {
+class UserMiddleware extends MiddlewareClass<AppState> {
 
   @override
   Future<void> call(Store<AppState> store, dynamic action, NextDispatcher next) async{
@@ -17,7 +17,7 @@ class PersonMiddleware extends MiddlewareClass<AppState> {
 
     if(action is FetchUsersAction){
       var users = <User>[];
-      final response = await http.get('http://10.0.2.2:3000/data', headers: {"Accept": "application/json"});
+      final response = await http.get('https://randomuser.me/api/?results=50', headers: {"Accept": "application/json"});
       if(response.statusCode == 200) {
         var data = json.decode(response.body);
         for (var elem in data) {

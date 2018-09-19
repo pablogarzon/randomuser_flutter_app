@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:randomuser_flutter_app/redux/app_state.dart';
 import 'package:randomuser_flutter_app/redux/app_reducer.dart';
+import 'package:randomuser_flutter_app/redux/user_middleware.dart';
 
 import 'package:randomuser_flutter_app/pages/home_page.dart';
 
@@ -12,8 +13,9 @@ void main() => runApp(RandomUserApp());
 
 class RandomUserApp extends StatelessWidget {
   final store = Store<AppState>(
-      appReducer,
-      initialState: AppState.initial(),
+    appReducer,
+    initialState: AppState.initial(),
+    middleware: [UserMiddleware()]
   );
 
   @override
