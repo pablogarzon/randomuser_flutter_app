@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                       width: 90.0,
                       child: ListTile(
                         leading: CircleAvatar(
-                          child: Image(image: NetworkImage(vm.users[index].picture.thumbnail)),
+                          backgroundImage: NetworkImage(vm.users[index].picture.thumbnail),
                         ),
                         title: Center(
                           child: Text(vm.users[index].email),
