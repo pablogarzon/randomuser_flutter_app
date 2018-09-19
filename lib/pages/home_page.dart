@@ -19,6 +19,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Users"),
+        actions: <Widget>[
+          StoreConnector(
+              converter: (Store<AppState> store) => () => store.dispatch(FetchUsersAction()),
+              builder: (BuildContext context, VoidCallback callback){
+                return IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: callback
+                );
+              }
+          ),
+        ],
       ),
       body: StoreBuilder(
         onInit: (store) =>  store.dispatch(FetchUsersAction()),
