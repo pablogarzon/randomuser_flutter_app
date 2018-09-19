@@ -30,8 +30,13 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.all(5.0),
                 height: 50.0,
                 width: 90.0,
-                child: Center(
-                  child: Text("Hi!"),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    child: Image(image: NetworkImage(vm.users[index].picture.thumbnail)),
+                  ),
+                  title: Center(
+                    child: Text(vm.users[index].email),
+                  ),
                 )
               );
             },
