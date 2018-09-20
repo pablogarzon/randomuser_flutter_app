@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
         title: Text("Users"),
         actions: <Widget>[
           StoreConnector(
-              converter: (Store<AppState> store) => () => store.dispatch(FetchUsersAction()),
-              builder: (BuildContext context, VoidCallback callback){
-                return IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: callback
-                );
-              }
+            converter: (Store<AppState> store) => () => store.dispatch(FetchUsersAction()),
+            builder: (BuildContext context, VoidCallback callback){
+              return IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: callback
+              );
+            }
           ),
         ],
       ),
@@ -40,17 +40,22 @@ class _HomePageState extends State<HomePage> {
               return ListView.builder(
                 itemBuilder: (BuildContext context, int index){
                   return Container(
-                      margin: EdgeInsets.all(5.0),
-                      height: 50.0,
-                      width: 90.0,
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(vm.users[index].picture.thumbnail),
-                        ),
-                        title: Center(
-                          child: Text(vm.users[index].email),
-                        ),
-                      )
+                    decoration: BoxDecoration(
+                      color: Colors.white12.withOpacity(0.5),
+                      border: Border(
+                        top: BorderSide(color: Colors.black, width: 0.25),
+                      ),
+                    ),
+                    height: 75.0,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(vm.users[index].picture.thumbnail),
+                      ),
+                      title: Center(
+                        child: Text(vm.users[index].email),
+                      ),
+                      onTap: () => print(vm.users[index].email),
+                    ),
                   );
                 },
                 itemCount: vm.users.length,
