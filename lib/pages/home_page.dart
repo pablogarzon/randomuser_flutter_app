@@ -29,6 +29,10 @@ class _HomePageState extends State<HomePage> {
               );
             }
           ),
+          IconButton(
+            icon: Icon(Icons.tune),
+            onPressed: () => Navigator.pushNamed(context, '/filters')
+          )
         ],
       ),
       body: StoreBuilder(

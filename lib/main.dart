@@ -9,6 +9,8 @@ import 'package:randomuser_flutter_app/redux/user_middleware.dart';
 
 import 'package:randomuser_flutter_app/pages/home_page.dart';
 
+import 'package:randomuser_flutter_app/pages/filters_page.dart';
+
 void main() => runApp(RandomUserApp());
 
 class RandomUserApp extends StatelessWidget {
@@ -28,6 +30,9 @@ class RandomUserApp extends StatelessWidget {
           primarySwatch: Colors.green
         ),
         home: HomePage(),
+        routes: <String, WidgetBuilder>{
+          '/filters': (BuildContext context) => FiltersPage()
+        },
       ),
     );
   }
