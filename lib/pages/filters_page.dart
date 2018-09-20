@@ -25,7 +25,7 @@ class _FiltersPageState extends State<FiltersPage> {
         padding: EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-            Column(
+            _FilterSection(
               children: <Widget>[
                 Text("Gender:", style: TextStyle(fontSize: 18.0),),
                 Row(
@@ -54,7 +54,7 @@ class _FiltersPageState extends State<FiltersPage> {
               ],
             ),
             Divider(),
-            Column(
+            _FilterSection(
               children: <Widget>[
                 Text("Age:", style: TextStyle(fontSize: 18.0),),
                 Slider(
@@ -73,6 +73,29 @@ class _FiltersPageState extends State<FiltersPage> {
             )
           ],
         ),
+      )
+    );
+  }
+}
+
+
+class _FilterSection extends StatelessWidget {
+  final List<Widget> children;
+
+  _FilterSection({
+    this.children
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100.0,
+      child: Center(
+        child: Flex(
+          direction: Axis.vertical,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: children
+        )
       )
     );
   }
