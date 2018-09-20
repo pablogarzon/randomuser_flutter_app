@@ -53,6 +53,24 @@ class _FiltersPageState extends State<FiltersPage> {
                 ),
               ],
             ),
+            Divider(),
+            Column(
+              children: <Widget>[
+                Text("Age:", style: TextStyle(fontSize: 18.0),),
+                Slider(
+                  value: _discreteValue,
+                  min: 0.0,
+                  max: 100.0,
+                  divisions: 5,
+                  label: '${_discreteValue.round()}',
+                  onChanged: (double value) {
+                    setState(() {
+                      _discreteValue = value;
+                    });
+                  },
+                )
+              ],
+            )
           ],
         ),
       )
