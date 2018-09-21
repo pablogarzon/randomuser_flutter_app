@@ -9,6 +9,14 @@ class _FiltersPageState extends State<FiltersPage> {
 
   String _gender;
   double _discreteValue = 20.0;
+  String _nationality;
+
+  final items = <DropdownMenuItem>[
+    DropdownMenuItem(child: Text("US"), value: "US",),
+    DropdownMenuItem(child: Text("DK"), value: "DK",),
+    DropdownMenuItem(child: Text("FR"), value: "FR",),
+    DropdownMenuItem(child: Text("GB"), value: "GB",),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +78,21 @@ class _FiltersPageState extends State<FiltersPage> {
                   },
                 )
               ],
+            ),
+            Divider(),
+            _FilterSection(
+              children: <Widget>[
+                Text("Nationality:", style: TextStyle(fontSize: 18.0),),
+                DropdownButton(
+                  items: items,
+                  value: _nationality,
+                  onChanged: (selected){
+                    setState(() {
+                      _nationality = selected;
+                    });
+                  },
+                )
+              ],
             )
           ],
         ),
@@ -83,8 +106,9 @@ class _FilterSection extends StatelessWidget {
   final List<Widget> children;
 
   _FilterSection({
+    Key key,
     this.children
-  });
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
