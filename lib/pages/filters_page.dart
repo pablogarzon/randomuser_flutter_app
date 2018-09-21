@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
+import 'package:randomuser_flutter_app/redux/app_state.dart';
+import 'package:randomuser_flutter_app/redux/user_actions.dart';
+
+import 'package:randomuser_flutter_app/models/user_filters.dart';
+
 class FiltersPage extends StatefulWidget {
   @override
   _FiltersPageState createState() => _FiltersPageState();
@@ -7,9 +15,7 @@ class FiltersPage extends StatefulWidget {
 
 class _FiltersPageState extends State<FiltersPage> {
 
-  String _gender= "all";
-  double _age = 100.0;
-  String _nationality;
+  UserFilters filters = UserFilters.getDefault();
   final items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
     DropdownMenuItem(child: Text("DK"), value: "DK",),
@@ -19,19 +25,19 @@ class _FiltersPageState extends State<FiltersPage> {
 
   _onGenderChange(String value){
     setState(() {
-      _gender = value;
+      filters.gender = value;
     });
   }
 
   _onAgeChange(double value){
     setState(() {
-      _age = value;
+      filters.age = value;
     });
   }
 
   _onNationalityChange(selected){
     setState(() {
-      _nationality = selected;
+      filters.nationality = selected;
     });
   }
 
@@ -40,10 +46,15 @@ class _FiltersPageState extends State<FiltersPage> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          FlatButton(
-            onPressed: null, 
-            child: Text("Apply") 
-          )
+          StoreConnector(
+            converter: (Store<AppState> store) => () => store.dispatch(ApplyFiltersAction(filters)),
+            builder: (BuildContext context, VoidCallback callback){
+              return FlatButton(
+                  child: Text("Apply"),
+                  onPressed: callback
+              );
+            }
+          ),
         ],
       ),
       body: Container(
@@ -58,19 +69,19 @@ class _FiltersPageState extends State<FiltersPage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Radio(value: "all", groupValue: _gender, onChanged: _onGenderChange),
+                        Radio(value: "all", groupValue: filters.gender, onChanged: _onGenderChange),
                         Text("All"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "male", groupValue: _gender, onChanged: _onGenderChange),
+                        Radio(value: "male", groupValue: filters.gender, onChanged: _onGenderChange),
                         Text("Male"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "female", groupValue: _gender, onChanged: _onGenderChange),
+                        Radio(value: "female", groupValue: filters.gender, onChanged: _onGenderChange),
                         Text("Female"),
                       ],
                     ),
@@ -83,11 +94,11 @@ class _FiltersPageState extends State<FiltersPage> {
               children: <Widget>[
                 Text("Age:", style: TextStyle(fontSize: 18.0),),
                 Slider(
-                  value: _age,
+                  value: filters.age,
                   min: 0.0,
                   max: 100.0,
                   divisions: 5,
-                  label: '${_age.round()}',
+                  label: '${filters.age.round()}',
                   onChanged: _onAgeChange
                 )
               ],
@@ -98,7 +109,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 Text("Nationality:", style: TextStyle(fontSize: 18.0),),
                 DropdownButton(
                   items: items,
-                  value: _nationality,
+                  value: filters.nationality,
                   onChanged: _onNationalityChange
                 )
               ],
