@@ -8,7 +8,7 @@ class FiltersPage extends StatefulWidget {
 class _FiltersPageState extends State<FiltersPage> {
 
   String _gender= "all";
-  double _discreteValue = 20.0;
+  double _age = 100.0;
   String _nationality;
   final items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
@@ -20,6 +20,18 @@ class _FiltersPageState extends State<FiltersPage> {
   _onGenderChange(String value){
     setState(() {
       _gender = value;
+    });
+  }
+
+  _onAgeChange(double value){
+    setState(() {
+      _age = value;
+    });
+  }
+
+  _onNationalityChange(selected){
+    setState(() {
+      _nationality = selected;
     });
   }
 
@@ -71,16 +83,12 @@ class _FiltersPageState extends State<FiltersPage> {
               children: <Widget>[
                 Text("Age:", style: TextStyle(fontSize: 18.0),),
                 Slider(
-                  value: _discreteValue,
+                  value: _age,
                   min: 0.0,
                   max: 100.0,
                   divisions: 5,
-                  label: '${_discreteValue.round()}',
-                  onChanged: (double value) {
-                    setState(() {
-                      _discreteValue = value;
-                    });
-                  },
+                  label: '${_age.round()}',
+                  onChanged: _onAgeChange
                 )
               ],
             ),
@@ -91,11 +99,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 DropdownButton(
                   items: items,
                   value: _nationality,
-                  onChanged: (selected){
-                    setState(() {
-                      _nationality = selected;
-                    });
-                  },
+                  onChanged: _onNationalityChange
                 )
               ],
             )
