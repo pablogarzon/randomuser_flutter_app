@@ -7,16 +7,21 @@ class FiltersPage extends StatefulWidget {
 
 class _FiltersPageState extends State<FiltersPage> {
 
-  String _gender;
+  String _gender= "all";
   double _discreteValue = 20.0;
   String _nationality;
-
   final items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
     DropdownMenuItem(child: Text("DK"), value: "DK",),
     DropdownMenuItem(child: Text("FR"), value: "FR",),
     DropdownMenuItem(child: Text("GB"), value: "GB",),
   ];
+
+  _onGenderChange(String value){
+    setState(() {
+      _gender = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +46,19 @@ class _FiltersPageState extends State<FiltersPage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Radio(value: "all", groupValue: _gender, onChanged: null),
+                        Radio(value: "all", groupValue: _gender, onChanged: _onGenderChange),
                         Text("All"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "all", groupValue: _gender, onChanged: null),
+                        Radio(value: "male", groupValue: _gender, onChanged: _onGenderChange),
                         Text("Male"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "all", groupValue: _gender, onChanged: null),
+                        Radio(value: "female", groupValue: _gender, onChanged: _onGenderChange),
                         Text("Female"),
                       ],
                     ),
