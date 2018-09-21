@@ -1,11 +1,11 @@
 class UserFilters {
   String gender;
   double age;
-  String nationality;
+  String nat;
 
   UserFilters({
     this.gender,
     this.age,
-    this.nationality
+    this.nat
   });
 }

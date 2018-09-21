@@ -13,12 +13,11 @@ List<User> usersReducer(List<User> users, action) {
 }
 
 List<User> applyFilterReducer(List<User> users, ApplyFiltersAction action){
-  var us = users
-      .where((user) =>
-  action.filters.gender == null || user.gender == action.filters.gender)
-      .where((user) => user.dob.age <= action.filters.age)
-      .where((user) =>
-  action.filters.nationality == null || user.nat == action.filters.nationality)
-      .toList();
-  return us;
+  return users
+    .where((user) =>
+      action.filters.gender == null || user.gender == action.filters.gender)
+    .where((user) => action.filters.age == null || user.dob.age <= action.filters.age)
+    .where((user) =>
+      action.filters.nat == null || user.nat == action.filters.nat)
+    .toList();
 }

@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white12.withOpacity(0.5),
                       border: Border(
                         top: BorderSide(color: Colors.black, width: 0.25),
+                        bottom: BorderSide(color: Colors.black, width: 0.25),
                       ),
                     ),
                     height: 75.0,
@@ -79,8 +80,7 @@ class _HomePageViewModel {
 
   factory _HomePageViewModel.fromStore(Store<AppState> store) {
     return _HomePageViewModel(
-        users: store.state.users
+      users: store.state.users
     );
   }
-
 }

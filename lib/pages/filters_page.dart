@@ -37,7 +37,7 @@ class _FiltersPageState extends State<FiltersPage> {
 
   _onNationalityChange(selected){
     setState(() {
-      filters.nationality = selected;
+      filters.nat = selected;
     });
   }
 
@@ -53,8 +53,8 @@ class _FiltersPageState extends State<FiltersPage> {
             },
             builder: (BuildContext context, VoidCallback callback){
               return FlatButton(
-                  child: Text("Apply"),
-                  onPressed: callback
+                child: Text("Apply"),
+                onPressed: callback
               );
             }
           ),
@@ -112,7 +112,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 Text("Nationality:", style: TextStyle(fontSize: 18.0),),
                 DropdownButton(
                   items: items,
-                  value: filters.nationality,
+                  value: filters.nat,
                   onChanged: _onNationalityChange
                 )
               ],
