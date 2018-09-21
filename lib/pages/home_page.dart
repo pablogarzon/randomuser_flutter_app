@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       color: Colors.white12.withOpacity(0.5),
                       border: Border(
-                        top: BorderSide(color: Colors.black, width: 0.25),
                         bottom: BorderSide(color: Colors.black, width: 0.25),
                       ),
                     ),
@@ -80,7 +79,7 @@ class _HomePageViewModel {
 
   factory _HomePageViewModel.fromStore(Store<AppState> store) {
     return _HomePageViewModel(
-      users: store.state.filteredUsers ?? store.state.users
+      users: store.state.userState.filteredUsers ?? store.state.userState.users
     );
   }
 }
