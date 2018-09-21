@@ -15,7 +15,7 @@ class FiltersPage extends StatefulWidget {
 
 class _FiltersPageState extends State<FiltersPage> {
 
-  UserFilters filters = UserFilters.getDefault();
+  UserFilters filters = UserFilters(age: 100.0);
   final items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
     DropdownMenuItem(child: Text("DK"), value: "DK",),
@@ -47,7 +47,10 @@ class _FiltersPageState extends State<FiltersPage> {
       appBar: AppBar(
         actions: <Widget>[
           StoreConnector(
-            converter: (Store<AppState> store) => () => store.dispatch(ApplyFiltersAction(filters)),
+            converter: (Store<AppState> store) => (){
+              Navigator.pop(context);
+              store.dispatch(ApplyFiltersAction(filters));
+            },
             builder: (BuildContext context, VoidCallback callback){
               return FlatButton(
                   child: Text("Apply"),
@@ -69,7 +72,7 @@ class _FiltersPageState extends State<FiltersPage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Radio(value: "all", groupValue: filters.gender, onChanged: _onGenderChange),
+                        Radio(value: null, groupValue: filters.gender, onChanged: _onGenderChange),
                         Text("All"),
                       ],
                     ),
@@ -97,7 +100,7 @@ class _FiltersPageState extends State<FiltersPage> {
                   value: filters.age,
                   min: 0.0,
                   max: 100.0,
-                  divisions: 5,
+                  divisions: 10,
                   label: '${filters.age.round()}',
                   onChanged: _onAgeChange
                 )

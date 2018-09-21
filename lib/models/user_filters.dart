@@ -3,8 +3,9 @@ class UserFilters {
   double age;
   String nationality;
 
-  UserFilters.getDefault(){
-    this.gender = "all";
-    this.age = 100.0;
-  }
+  UserFilters({
+    this.gender,
+    this.age,
+    this.nationality
+  });
 }
