@@ -80,7 +80,7 @@ class _HomePageViewModel {
 
   factory _HomePageViewModel.fromStore(Store<AppState> store) {
     return _HomePageViewModel(
-      users: store.state.users
+      users: store.state.filteredUsers ?? store.state.users
     );
   }
 }
