@@ -22,10 +22,9 @@ UserState _receivedUsers(UserState state, ReceivedUsersAction action){
 UserState _applyFilters(UserState state, ApplyFiltersAction action){
   var list = state.users
     .where((user) =>
-      action.filters.gender == null || user.gender == action.filters.gender)
-    .where((user) => action.filters.age == null || user.dob.age <= action.filters.age)
-    .where((user) =>
-      action.filters.nat == null || user.nat == action.filters.nat)
+      (action.filters.gender == null || user.gender == action.filters.gender)
+      && (action.filters.age == null || user.dob.age <= action.filters.age)
+      && (action.filters.nat == null || user.nat == action.filters.nat))
     .toList();
   return state.copyWith(filters: action.filters, filteredUsers: list);
 }
