@@ -8,14 +8,28 @@ import 'package:randomuser_flutter_app/redux/user_actions.dart';
 
 import 'package:randomuser_flutter_app/models/user_filters.dart';
 
-class FiltersPage extends StatefulWidget {
+class FiltersPage extends StatelessWidget {
   @override
-  _FiltersPageState createState() => _FiltersPageState();
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, _FiltersPageViewModel>(
+      converter: (Store<AppState> store) => _FiltersPageViewModel.fromStore(store),
+      builder: (BuildContext context, _FiltersPageViewModel vm){
+        return _FiltersPageContent(filters: vm.filters,);
+      }
+    );
+  }
 }
 
-class _FiltersPageState extends State<FiltersPage> {
+class _FiltersPageContent extends StatefulWidget {
+  final UserFilters filters;
 
-  UserFilters filters = UserFilters(age: 100.0);
+  _FiltersPageContent({Key key, this.filters}): super(key: key);
+
+  @override
+  __FiltersPageContentState createState() => __FiltersPageContentState();
+}
+
+class __FiltersPageContentState extends State<_FiltersPageContent> {
   final items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
     DropdownMenuItem(child: Text("DK"), value: "DK",),
@@ -25,19 +39,19 @@ class _FiltersPageState extends State<FiltersPage> {
 
   _onGenderChange(String value){
     setState(() {
-      filters.gender = value;
+      widget.filters.gender = value;
     });
   }
 
   _onAgeChange(double value){
     setState(() {
-      filters.age = value;
+      widget.filters.age = value;
     });
   }
 
   _onNationalityChange(selected){
     setState(() {
-      filters.nat = selected;
+      widget.filters.nat = selected;
     });
   }
 
@@ -49,11 +63,11 @@ class _FiltersPageState extends State<FiltersPage> {
           StoreConnector(
             converter: (Store<AppState> store) => (){
               Navigator.pop(context);
-              store.dispatch(ApplyFiltersAction(filters));
+              store.dispatch(ApplyFiltersAction(widget.filters));
             },
             builder: (BuildContext context, VoidCallback callback){
               return FlatButton(
-                child: Text("Apply"),
+                child: Text("Apply", style: TextStyle(color: Colors.white),),
                 onPressed: callback
               );
             }
@@ -72,19 +86,19 @@ class _FiltersPageState extends State<FiltersPage> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Radio(value: null, groupValue: filters.gender, onChanged: _onGenderChange),
+                        Radio(value: null, groupValue: widget.filters.gender, onChanged: _onGenderChange),
                         Text("All"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "male", groupValue: filters.gender, onChanged: _onGenderChange),
+                        Radio(value: "male", groupValue: widget.filters.gender, onChanged: _onGenderChange),
                         Text("Male"),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Radio(value: "female", groupValue: filters.gender, onChanged: _onGenderChange),
+                        Radio(value: "female", groupValue: widget.filters.gender, onChanged: _onGenderChange),
                         Text("Female"),
                       ],
                     ),
@@ -97,11 +111,11 @@ class _FiltersPageState extends State<FiltersPage> {
               children: <Widget>[
                 Text("Age:", style: TextStyle(fontSize: 18.0),),
                 Slider(
-                  value: filters.age,
+                  value: widget.filters.age,
                   min: 0.0,
                   max: 100.0,
                   divisions: 10,
-                  label: '${filters.age.round()}',
+                  label: '${widget.filters.age.round()}',
                   onChanged: _onAgeChange
                 )
               ],
@@ -112,7 +126,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 Text("Nationality:", style: TextStyle(fontSize: 18.0),),
                 DropdownButton(
                   items: items,
-                  value: filters.nat,
+                  value: widget.filters.nat,
                   onChanged: _onNationalityChange
                 )
               ],
@@ -124,9 +138,8 @@ class _FiltersPageState extends State<FiltersPage> {
   }
 }
 
-
 class _FilterSection extends StatelessWidget {
-  final List<Widget> children;
+  List<Widget> children;
 
   _FilterSection({
     Key key,
@@ -144,6 +157,18 @@ class _FilterSection extends StatelessWidget {
           children: children
         )
       )
+    );
+  }
+}
+
+class _FiltersPageViewModel {
+  final UserFilters filters;
+
+  _FiltersPageViewModel({this.filters});
+
+  factory _FiltersPageViewModel.fromStore(Store<AppState> store) {
+    return _FiltersPageViewModel(
+      filters: store.state.userState.filters
     );
   }
 }

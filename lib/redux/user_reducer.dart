@@ -27,5 +27,5 @@ UserState _applyFilters(UserState state, ApplyFiltersAction action){
     .where((user) =>
       action.filters.nat == null || user.nat == action.filters.nat)
     .toList();
-  return state.copyWith(filteredUsers: list);
+  return state.copyWith(filters: action.filters, filteredUsers: list);
 }

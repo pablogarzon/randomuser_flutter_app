@@ -5,7 +5,7 @@ class UserFilters {
 
   UserFilters({
     this.gender,
-    this.age,
+    this.age = 100.0,
     this.nat
   });
 }
