@@ -21,7 +21,7 @@ class FiltersPage extends StatelessWidget {
 }
 
 class _FiltersPageContent extends StatefulWidget {
-  final UserFilters filters;
+  UserFilters filters;
 
   _FiltersPageContent({Key key, this.filters}): super(key: key);
 
@@ -52,6 +52,12 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
   _onNationalityChange(selected){
     setState(() {
       widget.filters.nat = selected;
+    });
+  }
+
+  _clearFilters(){
+    setState(() {
+      widget.filters = UserFilters();
     });
   }
 
@@ -130,7 +136,19 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
                   onChanged: _onNationalityChange
                 )
               ],
-            )
+            ),
+            StoreConnector(
+                converter: (Store<AppState> store) => _clearFilters,
+                builder: (BuildContext context, VoidCallback callback){
+                  return Center(
+                    child: RaisedButton.icon(
+                        onPressed: callback,
+                        icon: Icon(Icons.delete),
+                        label: Text("Clear Filters")
+                    ),
+                  );
+                }
+            ),
           ],
         ),
       )
@@ -139,7 +157,7 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
 }
 
 class _FilterSection extends StatelessWidget {
-  List<Widget> children;
+  final List<Widget> children;
 
   _FilterSection({
     Key key,
