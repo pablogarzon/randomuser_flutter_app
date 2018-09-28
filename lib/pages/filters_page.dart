@@ -13,9 +13,8 @@ class FiltersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _FiltersPageViewModel>(
       converter: (Store<AppState> store) => _FiltersPageViewModel.fromStore(store),
-      builder: (BuildContext context, _FiltersPageViewModel vm){
-        return _FiltersPageContent(filters: vm.filters,);
-      }
+      builder: (BuildContext context, _FiltersPageViewModel vm) =>
+        _FiltersPageContent(filters: vm.filters,)
     );
   }
 }
@@ -71,12 +70,8 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
               Navigator.pop(context);
               store.dispatch(ApplyFiltersAction(widget.filters));
             },
-            builder: (BuildContext context, VoidCallback callback){
-              return FlatButton(
-                child: Text("Apply", style: TextStyle(color: Colors.white),),
-                onPressed: callback
-              );
-            }
+            builder: (BuildContext context, VoidCallback callback) =>
+              FlatButton(child: Text("Apply", style: TextStyle(color: Colors.white),), onPressed: callback)
           ),
         ],
       ),
@@ -138,16 +133,15 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
               ],
             ),
             StoreConnector(
-                converter: (Store<AppState> store) => _clearFilters,
-                builder: (BuildContext context, VoidCallback callback){
-                  return Center(
-                    child: RaisedButton.icon(
-                        onPressed: callback,
-                        icon: Icon(Icons.delete),
-                        label: Text("Clear Filters")
-                    ),
-                  );
-                }
+              converter: (Store<AppState> store) => _clearFilters,
+              builder: (BuildContext context, VoidCallback callback) =>
+                Center(
+                  child: RaisedButton.icon(
+                    onPressed: callback,
+                    icon: Icon(Icons.delete),
+                    label: Text("Clear Filters")
+                  ),
+                ),
             ),
           ],
         ),

@@ -1,4 +1,3 @@
-import 'package:randomuser_flutter_app/models/user.dart';
 import 'user_state.dart';
 
 class AppState {
