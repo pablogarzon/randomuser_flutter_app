@@ -5,13 +5,11 @@ class UserState {
   final User user;
   final List<User> users;
   final UserFilters filters;
-  final List<User> filteredUsers;
 
   const UserState({
     this.user,
     this.users,
     this.filters,
-    this.filteredUsers
   });
 
   factory UserState.initial(){
@@ -25,14 +23,12 @@ class UserState {
   UserState copyWith({
     User user,
     List<User> users,
-    UserFilters filters,
-    List<User> filteredUsers
+    UserFilters filters
   }){
     return UserState(
       user: user ?? this.user,
       users: users ?? this.users,
       filters: filters ?? this.filters,
-      filteredUsers: filteredUsers ?? this.filteredUsers
     );
   }
 }

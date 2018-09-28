@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:randomuser_flutter_app/redux/app_state.dart';
 import 'package:randomuser_flutter_app/redux/user/user_actions.dart';
+import 'package:randomuser_flutter_app/redux/user/user_selectors.dart';
 
 import 'package:randomuser_flutter_app/models/user.dart';
 
@@ -72,7 +73,7 @@ class _HomePageViewModel {
 
   factory _HomePageViewModel.fromStore(Store<AppState> store) {
     return _HomePageViewModel(
-      users: store.state.userState.filteredUsers ?? store.state.userState.users
+      users: filteredUsersSelector(store.state)
     );
   }
 }
