@@ -4,7 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:randomuser_flutter_app/redux/app_state.dart';
-import 'package:randomuser_flutter_app/redux/user_actions.dart';
+import 'package:randomuser_flutter_app/redux/user/user_actions.dart';
 
 import 'package:randomuser_flutter_app/models/user.dart';
 

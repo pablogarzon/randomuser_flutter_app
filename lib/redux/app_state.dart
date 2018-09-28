@@ -1,4 +1,4 @@
-import 'user_state.dart';
+import 'user/user_state.dart';
 
 class AppState {
   final UserState userState;
