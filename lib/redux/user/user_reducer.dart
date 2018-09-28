@@ -3,6 +3,8 @@ import 'package:redux/redux.dart';
 import 'user_state.dart';
 import 'user_actions.dart';
 
+import 'package:randomuser_flutter_app/models/user_filters.dart';
+
 final userReducer = combineReducers<UserState>([
   TypedReducer<UserState, FetchUsersAction>(_requestingUsers),
   TypedReducer<UserState, ReceivedUsersAction>(_receivedUsers),
@@ -14,7 +16,7 @@ UserState _requestingUsers(UserState state, FetchUsersAction action){
 }
 
 UserState _receivedUsers(UserState state, ReceivedUsersAction action){
-  return state.copyWith(users: action.users);
+  return state.copyWith(users: action.users, filters: UserFilters());
 }
 
 UserState _applyFilters(UserState state, ApplyFiltersAction action){
