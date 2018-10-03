@@ -29,7 +29,7 @@ class _FiltersPageContent extends StatefulWidget {
 }
 
 class __FiltersPageContentState extends State<_FiltersPageContent> {
-  final items = <DropdownMenuItem>[
+  final _items = <DropdownMenuItem>[
     DropdownMenuItem(child: Text("US"), value: "US",),
     DropdownMenuItem(child: Text("DK"), value: "DK",),
     DropdownMenuItem(child: Text("FR"), value: "FR",),
@@ -126,7 +126,7 @@ class __FiltersPageContentState extends State<_FiltersPageContent> {
               children: <Widget>[
                 Text("Nationality:", style: TextStyle(fontSize: 18.0),),
                 DropdownButton(
-                  items: items,
+                  items: _items,
                   value: widget.filters.nat,
                   onChanged: _onNationalityChange
                 )
@@ -180,7 +180,7 @@ class _FiltersPageViewModel {
 
   factory _FiltersPageViewModel.fromStore(Store<AppState> store) {
     return _FiltersPageViewModel(
-      filters: store.state.userState.filters
+      filters: store.state.userState.filters.copy()
     );
   }
 }
